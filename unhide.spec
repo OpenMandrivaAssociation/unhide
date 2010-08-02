@@ -5,7 +5,7 @@ Summary:        Tool to find hidden processes and TCP/UDP ports from rootkits
 Group:          System/Configuration/Other
 License:        GPLv3
 URL:            http://www.security-projects.com/?Unhide
-Source0:        http://www.security-projects.com/unhide-20100201.tgz
+Source0:        http://www.security-projects.com/%{name}-%{version}.tgz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
