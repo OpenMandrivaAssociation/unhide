@@ -1,26 +1,31 @@
 Name:           unhide
-Version:        20100201
+Version:        20100819
 Release:        %mkrel 1
 Summary:        Tool to find hidden processes and TCP/UDP ports from rootkits
 Group:          System/Configuration/Other
-License:        GPLv3
+License:        GPLv3+
 URL:            http://www.security-projects.com/?Unhide
 Source0:        http://www.security-projects.com/%{name}-%{version}.tgz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
-Unhide is a forensic tool to find processes and TCP/UDP ports hidden by
-rootkits, Linux kernel modules or by other techniques. It includes two
+Unhide is a forensic tool to find hidden processes and TCP/UDP ports by
+rootkits / LKMs or by another hidden technique. It includes two
 utilities: unhide and unhide-tcp.
 
-Unhide detects hidden processes using three techniques:
+Unhide detects hidden processes using six techniques:
 
- - comparing the output of /proc and /bin/ps
- - comparing the information gathered from /bin/ps with the one gathered
-   from system calls (syscall scanning)
- - full scan of the process ID space (PIDs bruteforcing)
+  - Compare /proc vs /bin/ps output
+  - Compare info gathered from /bin/ps with info gathered by walking through
+    the procfs.
+  - Compare info gathered from /bin/ps with info gathered from syscalls
+    (syscall scanning).
+  - Full PIDs space occupation (PIDs bruteforcing)
+  - Reverse search, verify that all thread seen by ps are also seen by
+    the kernel ( /bin/ps output vs /proc, procfs walking and syscall )
+  - Quick compare /proc, procfs walking and syscall vs /bin/ps output.
 
-unhide-tcp identifies TCP/UDP ports that are listening but are not listed
+Unhide-tcp identifies TCP/UDP ports that are listening but are not listed
 in /bin/netstat through brute forcing of all TCP/UDP ports available.
 
 %prep
@@ -47,6 +52,6 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING LEEME.txt README.txt
+%doc changelog LEEME.txt README.txt
 %{_mandir}/man8/unhide*
 %{_sbindir}/unhide*
