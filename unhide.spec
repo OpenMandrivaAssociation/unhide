@@ -1,6 +1,6 @@
 Name:           unhide
 Version:        20100819
-Release:        %mkrel 1
+Release:        %mkrel 2
 Summary:        Tool to find hidden processes and TCP/UDP ports from rootkits
 Group:          System/Configuration/Other
 License:        GPLv3+
@@ -32,8 +32,8 @@ in /bin/netstat through brute forcing of all TCP/UDP ports available.
 %setup -q -n %{name}-%{version}
 
 %build
-gcc %{optflags} -lpthread unhide-linux26.c -o unhide-linux26
-gcc %{optflags} unhide-tcp.c -o unhide-tcp
+gcc %{optflags} %{ldflags} -pthread unhide-linux26.c -o unhide-linux26
+gcc %{optflags} %{ldflags} unhide-tcp.c -o unhide-tcp
 
 
 %install
@@ -45,6 +45,10 @@ install -Dp -m0644 man/unhide-tcp.8 %{buildroot}%{_mandir}/man8/unhide-tcp.8
 
 pushd %{buildroot}%{_sbindir}
 	ln -s unhide-linux26 unhide
+popd
+
+pushd %{buildroot}%{_mandir}/man8
+        ln -s unhide.8 unhide-linux26.8
 popd
 
 %clean
