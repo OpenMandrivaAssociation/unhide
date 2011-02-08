@@ -1,11 +1,11 @@
 Name:           unhide
-Version:        20100819
-Release:        %mkrel 2
+Version:        20110113
+Release:        %mkrel 1
 Summary:        Tool to find hidden processes and TCP/UDP ports from rootkits
 Group:          System/Configuration/Other
 License:        GPLv3+
-URL:            http://www.security-projects.com/?Unhide
-Source0:        http://www.security-projects.com/%{name}-%{version}.tgz
+URL:            http://www.unhide-forensics.info/
+Source0:        http://downloads.sourceforge.net/project/%{name}/%{name}-%{version}.tgz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
