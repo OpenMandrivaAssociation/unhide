@@ -59,3 +59,27 @@ rm -rf %{buildroot}
 %doc changelog LEEME.txt README.txt
 %{_mandir}/man8/unhide*
 %{_sbindir}/unhide*
+
+
+%changelog
+* Tue Feb 08 2011 Jani Välimaa <wally@mandriva.org> 20110113-1mdv2011.0
++ Revision: 636928
+- new version 20110113
+- fix url and source tags
+
+* Sun Nov 14 2010 Jani Välimaa <wally@mandriva.org> 20100819-2mdv2011.0
++ Revision: 597542
+- build with LDFLAGS
+- add symlink for man page too
+
+* Sat Sep 25 2010 Jani Välimaa <wally@mandriva.org> 20100819-1mdv2011.0
++ Revision: 580960
+- new version 20100819
+- fix license and description
+
+* Mon Aug 02 2010 Jani Välimaa <wally@mandriva.org> 20100201-1mdv2011.0
++ Revision: 565116
+- fix source tag
+- import unhide
+
+
