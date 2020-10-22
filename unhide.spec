@@ -30,7 +30,7 @@ Unhide-tcp identifies TCP/UDP ports that are listening but are not listed
 in /bin/netstat through brute forcing of all TCP/UDP ports available.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -qc %{name}-%{version}
 
 %build
 gcc %{optflags} %{ldflags} -pthread unhide-linux*.c unhide-output.c -o unhide-linux
