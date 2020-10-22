@@ -1,6 +1,6 @@
 Name:           unhide
-Version:        20110113
-Release:        2
+Version:        20130526
+Release:        1
 Summary:        Tool to find hidden processes and TCP/UDP ports from rootkits
 Group:          System/Configuration/Other
 License:        GPLv3+
