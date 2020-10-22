@@ -1,11 +1,12 @@
 Name:           unhide
-Version:        20130526
+Version:        20200120
 Release:        1
 Summary:        Tool to find hidden processes and TCP/UDP ports from rootkits
 Group:          System/Configuration/Other
 License:        GPLv3+
 URL:            http://www.unhide-forensics.info/
-Source0:        http://downloads.sourceforge.net/project/%{name}/%{name}-%{version}.tgz
+#Source0:        http://downloads.sourceforge.net/project/%{name}/%{name}-%{version}.tgz
+Sources:	https://github.com/YJesus/Unhide/releases/download/%{version}/unhide_%{version}.tgz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
@@ -32,34 +33,32 @@ in /bin/netstat through brute forcing of all TCP/UDP ports available.
 %setup -q -n %{name}-%{version}
 
 %build
-gcc %{optflags} %{ldflags} -pthread unhide-linux26.c -o unhide-linux26
-gcc %{optflags} %{ldflags} unhide-tcp.c -o unhide-tcp
-
-
+gcc %{optflags} %{ldflags} -pthread unhide-linux*.c unhide-output.c -o unhide-linux
+gcc %{optflags} %{ldflags} unhide-tcp.c unhide-tcp-fast.c unhide-output.c -o unhide-tcp
+gcc %{optflags} %{ldflags} unhide_rb.c -o unhide_rb
+gcc %{optflags} %{ldflags} unhide-gids.c unhide-output.c -o unhide-gids
 %install
-rm -rf %{buildroot}
-install -Dp -m0755 unhide-linux26 %{buildroot}%{_sbindir}/unhide-linux26
+
+# binaries
+install -Dp -m0755 unhide-linux %{buildroot}%{_sbindir}/unhide-linux
 install -Dp -m0755 unhide-tcp %{buildroot}%{_sbindir}/unhide-tcp
-install -Dp -m0644 man/unhide.8 %{buildroot}%{_mandir}/man8/unhide.8
-install -Dp -m0644 man/unhide-tcp.8 %{buildroot}%{_mandir}/man8/unhide-tcp.8
+install -Dp -m0755 unhide_rb %{buildroot}%{_sbindir}/unhide_rb
+install -Dp -m0755 unhide-gids %{buildroot}%{_sbindir}/unhide-gids
 
-pushd %{buildroot}%{_sbindir}
-	ln -s unhide-linux26 unhide
-popd
+# man pages
+install -d %{buildroot}%{_mandir}/man8
 
-pushd %{buildroot}%{_mandir}/man8
-        ln -s unhide.8 unhide-linux26.8
-popd
+install -p -m0644 man/*.8 -t %{buildroot}%{_mandir}/man8/
 
-%clean
-rm -rf %{buildroot}
+# symlinks
+ln -s unhide-linux %{buildroot}%{_sbindir}/unhide
+ln -s unhide.8 %{buildroot}%{_mandir}/man8/unhide-linux.8
 
 %files
-%defattr(-,root,root,-)
-%doc changelog LEEME.txt README.txt
+%license COPYING
+%doc README.txt TODO
 %{_mandir}/man8/unhide*
 %{_sbindir}/unhide*
-
 
 %changelog
 * Tue Feb 08 2011 Jani Välimaa <wally@mandriva.org> 20110113-1mdv2011.0
