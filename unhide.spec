@@ -6,7 +6,7 @@ Group:          System/Configuration/Other
 License:        GPLv3+
 URL:            http://www.unhide-forensics.info/
 #Source0:        http://downloads.sourceforge.net/project/%{name}/%{name}-%{version}.tgz
-Sources0:	https://github.com/YJesus/Unhide/releases/download/%{version}/unhide_%{version}.tgz
+Source0:	https://github.com/YJesus/Unhide/releases/download/%{version}/unhide_%{version}.tgz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
